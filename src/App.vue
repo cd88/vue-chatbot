@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ChatItem msg="Chatbot isn't available right now"/>
+    <ChatEntry />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ChatItem from './components/ChatItem.vue'
+import ChatEntry from './components/ChatEntry.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ChatItem,
+    ChatEntry
   }
 }
 </script>
