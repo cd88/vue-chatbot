@@ -1,6 +1,9 @@
 <template>
   <div class="chat-item">
-    <h1>{{ msg }}</h1>
+    <h3 v-for="msg in chatLog"
+      class=msg.user>
+        {{ msg.text }}
+    </h3>
   </div>
 </template>
 
@@ -8,7 +11,7 @@
 export default {
   name: 'ChatItem',
   props: {
-    msg: String
+    chatLog: Array
   }
 }
 </script>
