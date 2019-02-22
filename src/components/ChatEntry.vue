@@ -17,11 +17,12 @@ export default {
   },
   methods: {
     sendMessage() {
+      if(this.messageDraft.trim() === "") return;
       const newChat = {
         id: uuid.v4(),
         direction: 'sent',
         sender: 'you',
-        message: this.messageDraft
+        message: this.messageDraft.replace(/\s+/gi, ' ')
       }
       this.$emit('send-chat', newChat)
       this.messageDraft = ''
