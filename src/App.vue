@@ -1,27 +1,38 @@
 <template>
   <div id="app">
-    <div class="chat-container">
-      <ChatItem v-bind:chatLog="chatLog"/>
-    </div>
-    <ChatEntry id="chat-entry" />
+    <ChatContainer v-bind:chatLog="chatLog" />
+    <ChatEntry v-on:send-chat="sendChat" id="chat-entry" />
   </div>
 </template>
 
 <script>
-import ChatItem from './components/ChatItem.vue'
+import ChatContainer from './components/ChatContainer.vue'
 import ChatEntry from './components/ChatEntry.vue'
 
 export default {
   name: 'app',
   components: {
-    ChatItem,
+    ChatContainer,
     ChatEntry
+  },
+  methods: {
+    sendChat(newChat){
+      this.chatLog.push(newChat);
+    }
   },
   data() {
     return {
       chatLog: [
-        { id:1, sender: "bot", text: "Chatbot isn't available right now" },
-        { id:2, sender: "you", text: "Chatbot isn't available right now" }
+        { id:1,
+          sender: "bot",
+          direction: "received",
+          message: "Chatbot isn't available right now"
+        },
+        { id:2,
+          sender: "you",
+          direction: "sent",
+          message: "Chatbot isn't available right now"
+        }
       ]
     }
   }
@@ -36,9 +47,8 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  text-align: center
   color: #2c3e50
-  margin-top: 60px
+  margin: 10px 5px
   display: flex
   flex-direction: column
   align-content: space-between

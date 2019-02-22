@@ -1,15 +1,31 @@
 <template>
-  <form class="chat-entry-form">
-    <input placeholder="works" />
-    <button type="button" name="button">Send</button>
+  <form @submit.prevent="sendMessage" class="chat-entry-form">
+    <input v-model="messageDraft" placeholder="works" />
+    <button type="submit" name="button">Send</button>
   </form>
 </template>
 
 <script>
+import uuid from 'uuid';
+
 export default {
   name: 'ChatEntry',
-  props: {
-    msg: String
+  data() {
+    return {
+      messageDraft: ''
+    }
+  },
+  methods: {
+    sendMessage() {
+      const newChat = {
+        id: uuid.v4(),
+        direction: 'sent',
+        sender: 'you',
+        message: this.messageDraft
+      }
+      this.$emit('send-chat', newChat)
+      this.messageDraft = ''
+    }
   }
 }
 </script>
